@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta />
+        <title>Trunk 调试</title>
+        <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/TweenMax.min.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/utils/Draggable.min.js'></script>
+
+        <script>
+            $(document).ready(function(){
+                $(".variable").keypress(function(e){
+                    if(e.keyCode == 13){
+                        var name =  e.currentTarget.id;
+                        var value = document.getElementById(name).value;
+
+                            //alert('insertR function');
+                        $.ajax({
+                            url: '/test1',
+                            type: 'get',
+                            data:{
+                                name: name,
+                                value: value,
+                            },
+                            dataType:'json',
+                            success: function(data){
+                                if(data.code === 200 ){
+                                    console.log(data.msg);
+                                    console.log('inserted successfully!');
+                                }
+                            }
+                        });
+                    }
+                });
+
+                $("#testButton").click(function(e){
+                    console.log(e);
+                });
+
+            });
+        </script>
+
+    </head>
+    <body>
+        <!--tool of load img or show database-->
+             <!--tool-->
+        <div id = 'tool'>
+            <!--head-->
+            <h1>Welcom to Trunk 调试</h1><hr>
+
+            <input class = "variable" id="test1" type='number' step='0.1' height='50' /><hr>
+
+            <input class = "variable" id="test2" type='number' step='0.1' height='50' />
+
+        </div>
+    </body>
+</html>
